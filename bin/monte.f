@@ -9,7 +9,6 @@ c  variable metric minimizer (Harwell subroutine lib.  as in Jumna with modifica
 c     minimizes a single structure
       
       implicit none
-      EXTERNAL sidechain_switcher
       logical mcdebug
       parameter (mcdebug = .FALSE.)
 c     Parameters
@@ -164,7 +163,6 @@ c
        
 c   start Monte Carlo
 c      write(*,*) "start MonteCarlo" ! will show up after all printed structures!
-      call sidechain_switcher_init(cartstatehandle)
       trials=0
       iaccept=1
 c      print*, "vmax: ", imcmax
@@ -262,8 +260,9 @@ c	    ens(i) = int(rr(2)*nrens(i))+1
            enddo
       endif
       if (mover.eq.4) then
-      call GGUBS(dseed,2,rr)
-      call sidechain_switcher(cartstatehandle,rr(1),rr(2))
+      error stop "trying to use unimplemented SidechainSwitcher"
+      !call GGUBS(dseed,2,rr)
+      !call sidechain_switcher(cartstatehandle,rr(1),rr(2))
       endif
 c make a move in HM direction and update x, y(1,i) and y(2,i) and dlig(j)
 c     call crand(dseed,ju+1,rr)
@@ -360,7 +359,6 @@ c do not overwrite xaa variables
       if (mcdebug) then 
             write(ERROR_UNIT,*) " reversing switch"
       endif 
-      call sidechain_switcher_reverse(cartstatehandle) !EXPERIMENTAL reverses effect
       endif
       do i=1,nlig
          ens(i)=ensaa(i)
@@ -433,7 +431,7 @@ c control scalerot range in [0 pi]
 
 
       if (iscore.eq.2) then     ! wenn --traj, schreibe akzeptierte schritte raus
-        call print_struc2_sidechain(seed,label,gesa,energies,nlig,
+        call print_struc2(seed,label,gesa,energies,nlig,
      1  ens,phi,ssi,rot,xa,ya,za,locrests,morph,
      2  nhm,nihm,dlig,has_locrests,lablen,cartstatehandle)
       endif
