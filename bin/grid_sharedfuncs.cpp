@@ -47,7 +47,7 @@ const Parameters &rc, const Parameters &ac, const Parameters &emin, const Parame
   
   Coor *fl, double &evdw, double &eelec,
   
-  Coor *fr, const double (&pm2)[3][3][3], double *deltar);
+  Coor *fr, const double (&pm2)[3][3][3], double *deltar,const int cartstatehandle);
 
 
 
@@ -65,7 +65,7 @@ const Parameters &rc, const Parameters &ac, const Parameters &emin, const Parame
   
   Coor *fl, double &evdw, double &eelec,
   
-  Coor *fr, const double (&pm2)[3][3][3], double *deltar);
+  Coor *fr, const double (&pm2)[3][3][3], double *deltar,const int cartstatehandle);
 
 void get_shm_name(int shm_id, char *shm_name) {
   sprintf(shm_name, "/attract-grid%d", shm_id);
@@ -85,20 +85,20 @@ const Parameters &rc, const Parameters &ac, const Parameters &emin, const Parame
   
   Coor *fl, double &evdw, double &eelec,
   
-  Coor *fr, const double (&pm2)[3][3][3], double *deltar)
+  Coor *fr, const double (&pm2)[3][3][3], double *deltar, int & cartstatehandle)
 {
   if (torquegrid) {
     nonbon_grid_torque(
      g,rigid,iab,fixre,xl,xr,pivotr,tr,wel,wer,chail,chair,iacil,iacir,natoml,natomr,
      rc,ac,emin,rmin2,ipon,potshape,cdie,epsilon,swi_on,swi_off,
-     fl,evdw,eelec,fr,pm2,deltar
+     fl,evdw,eelec,fr,pm2,deltar,cartstatehandle
     ); 
   }    
   else {  
     nonbon_grid_std(
      g,rigid,iab,fixre,xl,xr,pivotr,tr,wel,wer,chail,chair,iacil,iacir,natoml,natomr,
      rc,ac,emin,rmin2,ipon,potshape,cdie,epsilon,swi_on,swi_off,
-     fl,evdw,eelec,fr,pm2,deltar
+     fl,evdw,eelec,fr,pm2,deltar,cartstatehandle
     ); 
   }
 }

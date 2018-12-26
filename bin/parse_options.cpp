@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+#include "readParam_step.h"
+
 
 extern bool exists(const char *);
 extern void parse_restraintfile(MiniState &ms, const char *restfile);
@@ -124,6 +126,19 @@ void mcmax_usage() {
  fprintf(stderr, "--mcmax option usage: --mcmax <maximum number of MC steps>\n");
   exit(1);
 }
+
+void mcprobs_usage() {
+    fprintf(stderr, "--mcprobs option usage: --mcprobs <prob move/rot> <prob ensembleSwitch> <prob move+ensemble> <prob sidechainSwitch>\n"); //sc-switch non-operational
+    fprintf(stderr, "Probability is fraction of value and sum over all values,e.g. only rotation+translation: --mcprobs 1 0 0 0\n");
+    exit(1);
+}
+
+void steppot_usage() {
+    fprintf(stderr, "--step-pot option usage: --step-pot <step-potential param file>\n");
+    fprintf(stderr, "param file has to have step-pot format, see read_par_step.cpp \n");
+    exit(1);
+}
+
 
 void rest_usage() {
  fprintf(stderr, "--rest option usage: --rest <restraint file>\n");
@@ -430,6 +445,20 @@ void parse_options(int ministatehandle, int cartstatehandle, int nlig, int argc,
       if (mcmax <= 0) mcmax_usage();
       ms.imcmax = mcmax;
       n += 1;
+    }
+    
+    else if (!strcmp(arg,"--mcprobs")) {
+        if (argc-n < 1+MAXMOVER) mcprobs_usage();
+        for (int i=0;i<MAXMOVER;i++){
+            ms.imcprobs[i]=atoi(argv[n+1+i]);
+        }
+        n += MAXMOVER; //the "--mcprobs" is already accounted for by increment
+    }
+    else if (!strcmp(arg,"--step-pot")) {
+        if (argc-n < 2) steppot_usage();
+        c.useStepPot=true;
+        readParam_step(argv[n+1],c);
+        n += 1; //the "--mcprobs" is already accounted for by increment
     }
     
     else if (!strcmp(arg,"--rest")) {

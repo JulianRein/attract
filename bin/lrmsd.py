@@ -172,6 +172,7 @@ while 1:
 
   l1, l2 = strucs.next()
   ll = [float(v) for v in l2[0].split()[ens_receptor:ens_receptor+6]]
+  #might have to delete this for step-potential change
   for v in ll:
     if abs(v)> 0.001:
       raise ValueError("Structures have not yet been fitted")

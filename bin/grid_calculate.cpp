@@ -399,7 +399,7 @@ inline void _calc_potential(
           }
         }    
       }
-      
+      //energy += nonbon_step_cartstate(cartstatehandle, atomtype, atomtype2, sqrt(dsq));
       nonbon(1,wer[n],rci,aci,emini,rmin2i,ivor,dsq,
        1/dsq, dd[0],dd[1],dd[2],potshape, fswi,
        energy, grad);

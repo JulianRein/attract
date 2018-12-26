@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <stdlib.h>
-
+//iab: 0=only energies, 1 = energy+forces ,welwel: double ww = wel * wer[nb.index]; dsq:dist quadratic
 inline void nonbon(int iab, double welwel, double rc, double ac, double emin, double rmin2, int ivor, double dsq, double rr2, double dx, double dy, double dz, int potshape, double fswi,
 double &energy, Coor &grad) 
 

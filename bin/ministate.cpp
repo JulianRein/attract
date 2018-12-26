@@ -334,10 +334,11 @@ extern "C" void molpair_pairgen_(
     mp.iactr = new int[MAXATOM];
     mp.nonr = new int[MAXMOLPAIR];
     mp.nonl = new int[MAXMOLPAIR];
-    select_(MAXATOM, MAXRES, MAXMOLPAIR, 
-      molpairhandle, cartstatehandle, ms.rcut);       
-    pairgen_(MAXATOM, MAXRES, MAXMOLPAIR,
-      molpairhandle, cartstatehandle, ms.rcut);
+    // both methods below are IMO bugged for many copies, since select.f activates too many of them and array is too small...
+    /*    select_(MAXATOM, MAXRES, MAXMOLPAIR,
+     m olpairhandle, cartstatehandle, ms.rcut);  *
+     pairgen_(MAXATOM, MAXRES, MAXMOLPAIR,
+     molpairhandle, cartstatehandle, ms.rcut);*/
     mp.pairgen_done = 1;
   }
   nonp = mp.nonp;
