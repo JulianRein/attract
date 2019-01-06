@@ -1,0 +1,12 @@
+## Command line arguments: systsearch.dat /home/shodan/Uni/BA/myAttract/bin/../attract.par receptorr.pdb ligandr.pdb --fix-receptor --mc --mcscalerot 30 --mcscalecenter 3 --mcmax 1000 --gravity 2 --rstk 0.01 --mcprobs 70 0 0 30 --step-pot /home/shodan/Uni/BA/myAttract/bin/../step_zeroRep.par
+#pivot: auto
+#centered receptor: false
+#centered ligands: false
+#1
+### SEED 126176
+## placeholder sort
+## Energy: -53.191
+##   -58.662 0.000 0.000 0.000 5.472 0.000
+###placeholder deredudant
+   0.000000 0.000000 0.000000 0.0000 0.0000 0.0000
+   0 0 0 0 0 0 
